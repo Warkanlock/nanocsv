@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "nanocsv"
+version = "0.0.1"
+description = "A simple CSV manipulation tool using a custom DSL."
+authors = ["Warkanlock <warkanlock@gmail.com>"]
+license = "MIT"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+
+[tool.poetry.scripts]
+nanocsv = "main:main"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.3.3"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
