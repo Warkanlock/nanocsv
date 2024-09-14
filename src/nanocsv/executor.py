@@ -2,7 +2,6 @@ import csv
 from src.nanocsv.commands import AddRow, RemoveRow, SearchRow
 from src.nanocsv.msg import info_msg
 
-
 def execute_commands(commands, file_path):
     # Read existing CSV data
     with open(file_path, "r", newline="") as f:
@@ -31,7 +30,7 @@ def execute_commands(commands, file_path):
         elif isinstance(command, SearchRow):
             results = [headers]
             for row in rows:
-                for col, full_value in command.conditions.items():
+                for _, full_value in command.conditions.items():
                     partial = full_value.split(":")
                     key, value = partial[0], partial[1]
 
