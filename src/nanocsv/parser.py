@@ -11,7 +11,6 @@ def parse(tokens):
             values = []
             while i <= len(tokens):
                 if tokens[i][0] == 'VALUE' or tokens[i][0] == 'NUMBER':
-                    print(tokens[i])
                     values.append(tokens[i][1])
                     i += 1
                     if i < len(tokens) and tokens[i][0] == 'COMMA':
@@ -31,16 +30,14 @@ def parse(tokens):
             else:
                 raise SyntaxError("Expected row number after 'remove row'")
         elif token == 'SEARCH' and i + 1 < len(tokens) and tokens[i+1][0] == 'ROW':
+
             i += 2
             conditions = {}
-            while i + 2 < len(tokens):
-                if tokens[i][0] == 'VALUE' and tokens[i+1][0] == 'COLON' and tokens[i+2][0] == 'VALUE':
-                    key = tokens[i][1]
-                    value = tokens[i+2][1]
+            while i < len(tokens):
+                if tokens[i][0] == 'VALUE':
+                    key, value = tokens[i][0], tokens[i][1]
                     conditions[key] = value
-                    i += 3
-                    if i < len(tokens) and tokens[i][0] == 'COMMA':
-                        i += 1
+                    i += 1
                 else:
                     break
             commands.append(SearchRow(conditions))
