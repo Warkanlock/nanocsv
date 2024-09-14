@@ -32,7 +32,7 @@ class TestNanoCSV(unittest.TestCase):
         with open(self.test_csv, 'r', newline='') as f:
             reader = list(csv.reader(f))
             self.assertEqual(len(reader), 5)  # 4 rows + header
-            self.assertEqual(reader[-1], ['Diana', 'Prince', '28'])
+            self.assertEqual(reader[-1], 'Diana,Prince,28'.split(','))
     
     def test_remove_row(self):
         query = 'remove row 2'
@@ -61,7 +61,7 @@ class TestNanoCSV(unittest.TestCase):
         
         # Check if the search results are correct
         output = captured_output.getvalue()
-        self.assertIn('Charlie, Brown, 35', output)
+        self.assertIn('Charlie,Brown,35', output)
     
     def test_add_row_value_mismatch(self):
         query = 'add row Bruce, Wayne'
@@ -96,7 +96,7 @@ class TestNanoCSV(unittest.TestCase):
         sys.stdout = sys.__stdout__
         
         output = captured_output.getvalue()
-        self.assertIn('Diana, Prince, 28', output)
+        self.assertIn('Diana,Prince,28', output)
         # Check final CSV content
         with open(self.test_csv, 'r', newline='') as f:
             reader = list(csv.reader(f))
