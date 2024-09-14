@@ -1,12 +1,11 @@
 import csv
 from src.nanocsv.commands import AddRow, RemoveRow, SearchRow
+from src.nanocsv.msg import info_msg
 
-def info_msg(msg : str) -> str:
-    print(f"[INFO] {msg}")
 
 def execute_commands(commands, file_path):
     # Read existing CSV data
-    with open(file_path, 'r', newline='') as f:
+    with open(file_path, "r", newline="") as f:
         reader = csv.reader(f)
         data = list(reader)
         if not data:
@@ -49,13 +48,13 @@ def execute_commands(commands, file_path):
             info_msg(f"Found {len(results)} results")
             print("---")
             for result in results:
-                print(','.join(result))
+                print(",".join(result))
             print("---")
         else:
             raise TypeError("Unknown command type.")
 
     # Write updated data back to CSV
-    with open(file_path, 'w', newline='') as f:
+    with open(file_path, "w", newline="") as f:
         writer = csv.writer(f)
         writer.writerow(headers)
         writer.writerows(rows)
